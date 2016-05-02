@@ -64,4 +64,4 @@ mean.std.data <- data[, sapply(names(data), findNames)]
 summary.data <- group_by(mean.std.data, subject, activity) %>% summarise_each(funs(mean))
 
 ## Write out summary.data to the file 'tidy_data.txt'
-write.table(summary.data, file='tidy_data.txt')
+write.table(summary.data, file='tidy_data.txt', row.names = FALSE)
