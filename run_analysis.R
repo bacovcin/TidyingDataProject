@@ -25,13 +25,12 @@ traindat <- read.table(paste0(tmpdir,'\\UCI HAR Dataset\\train\\X_train.txt'),co
 trainsbj <- read.table(paste0(tmpdir,'\\UCI HAR Dataset\\train\\subject_train.txt'))
 names(trainsbj) <- 'subject'
 
-## Load the training activity label ids and lookup the activity labels
+## Load the training activity label ids
 trainact <- read.table(paste0(tmpdir,'\\UCI HAR Dataset\\train\\y_train.txt'))
-trainact2 <- merge(trainact, activities)[,2]
 
 ## Combine training data
-train <- as.data.frame(cbind(trainsbj, trainact2, traindat))
-names(train)[2] <- 'activity'
+train <- as.data.frame(cbind(trainsbj, trainact, traindat))
+names(train)[2] <- 'actid'
 
 ## Load the test set
 testdat <- read.table(paste0(tmpdir,'\\UCI HAR Dataset\\test\\X_test.txt'),col.names=features)
@@ -40,16 +39,19 @@ testdat <- read.table(paste0(tmpdir,'\\UCI HAR Dataset\\test\\X_test.txt'),col.n
 testsbj <- read.table(paste0(tmpdir,'\\UCI HAR Dataset\\test\\subject_test.txt'))
 names(testsbj) <- 'subject'
 
-## Load the test activity label ids and lookup the activity labels
+## Load the test activity label ids
 testact <- read.table(paste0(tmpdir,'\\UCI HAR Dataset\\test\\y_test.txt'))
-testact2 <- merge(testact, activities)[,2]
 
 ## Combine test data
-test <- as.data.frame(cbind(testsbj, testact2, testdat))
-names(test)[2] <- 'activity'
+test <- as.data.frame(cbind(testsbj, testact, testdat))
+names(test)[2] <- 'actid'
 
 ## Combine training and test data
 data <- as.data.frame(rbind(train, test))
+
+## Add activity labels
+data <- merge(data, activities, by.x = 'actid', by.y = 'V1')
+names(data)[dim(data)[2]]<-'activity'
 
 ## Extract only the subject, activity, and mean/standard deviation of measurements
 findNames <- function(x) {

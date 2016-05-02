@@ -37,3 +37,9 @@ Building off of the original codes described above, a new data set 'tidy_data.tx
 COL 1: Subject ids
 COL 2: Activities performed while measurements were taken (LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS)
 COL 3-68: Average mean and standard deviations for each measurement, grouped by subject id and activity 
+
+The features are derived via the following steps:
+1) Combine all of the training and test data together after adding subject ids and activity ids
+2) Look up the activity names based on activity ids
+3) Select only the columns describing the mean and standard deviation of the measurements
+4) Summarise over the selected columns by returning average mean and standard deviation for all measurements grouped by subject and activity
