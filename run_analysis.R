@@ -1,15 +1,21 @@
 library('dplyr')
 
-## Create a temporary file and download the data into it
-tmpfile <- tempfile()[1]
-download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip',tmpfile)
+## See if data is already in directory
+if (file.exists('UCI HAR Dataset')) {
+    tmpdir <- getwd()
+} else {
+    ## Create a temporary file and download the data into it
+    tmpfile <- tempfile()[1]
+    download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip',tmpfile)
 
-## Load the tmpfile and extract the data
-tmpdir <- tempdir()[1]
-files <- unzip(tmpfile, exdir = tmpdir)
+    ## Load the tmpfile and extract the data
+    tmpdir <- tempdir()[1]
+    files <- unzip(tmpfile, exdir = tmpdir)
+}
 
 ## Load the labels
 features <- read.table(paste0(tmpdir, '\\UCI HAR Dataset\\features.txt'))$V2
+features <- sub(',', '.', sub('\\)', '', sub('\\(', '', features)))
 activities <- read.table(paste0(tmpdir, '\\UCI HAR Dataset\\activity_labels.txt'))
 
 ## Load the training set
