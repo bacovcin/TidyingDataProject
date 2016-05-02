@@ -33,4 +33,7 @@ The set of variables that were estimated from these signals are:
 mean(): Mean value
 std(): Standard deviation
 
-For each of the above variables the average mean and std for each subject and activity is stored in the tidy_data.txt file.
+Building off of the original codes described above, a new data set 'tidy_data.txt' was created with the following variables:
+COL 1: Subject ids
+COL 2: Activities performed while measurements were taken (LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS)
+COL 3-68: Average mean and standard deviations for each measurement, grouped by subject id and activity 
