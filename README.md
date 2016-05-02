@@ -4,6 +4,9 @@ Takes data from 'http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recogniti
 ### Purpose
 Cleans the data and creates a summary data frame. Completed as part of a class probject for the "Getting and Cleaning Data" course on Coursera.
 
+### Usage
+Run the run_analysis.R script to generate a tidy summary of the UCI HAR data. If the UCI HAR Dataset folder is already in your working directory, then R will use that data. Otherwise, R will download the data into a temporary directory for use while the script is running.
+
 ### Files
 The run_analysis.R script:
   1. Gives the train and test data meaningful column names (based on codebook described below)
